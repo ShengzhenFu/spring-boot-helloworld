@@ -10,7 +10,7 @@ pipeline {
     //         args '--target=build'
     //     } 
     agent { any }
-    }
+    
     stages {
         stage('Docker login') {
             steps {
