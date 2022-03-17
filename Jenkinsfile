@@ -2,13 +2,14 @@ pipeline {
     environment {
                 DOCKER_HUB_LOGIN = credentials('docker-hub')
             }
-    agent { // Equivalent to "docker build -f Dockerfile . --target=build
-        dockerfile {
-            filename 'Dockerfile'
-            dir '.'
-            label 'build'
-            args '--target=build'
-        } 
+    // agent { // Equivalent to "docker build -f Dockerfile . --target=build
+    //     dockerfile {
+    //         filename 'Dockerfile'
+    //         dir '.'
+    //         label 'build'
+    //         args '--target=build'
+    //     } 
+    agent { any }
     }
     stages {
         stage('Docker login') {
