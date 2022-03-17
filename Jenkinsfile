@@ -40,4 +40,5 @@ pipeline {
                 echo "this is where kubectl apply -f deploy.yaml will run"
             }
         }    
+    }
 }
