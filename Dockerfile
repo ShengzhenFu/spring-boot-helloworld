@@ -8,7 +8,19 @@ COPY src src
 COPY pom.xml pom.xml
 COPY .mvn .mvn
 COPY mvnw .
-RUN --mount=type=cache,target=/root/.m2 ./mvnw package
+RUN --mount=type=cache,target=/root/.m2 ./mvnw -B -DskipTests clean package
+
+FROM openjdk:8-jdk-alpine as test
+# Running applications with user privileges helps to mitigate some risks. 
+# So suggest to run the application as a non-root user
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
+WORKDIR /workspace/app
+COPY src src
+COPY pom.xml pom.xml
+COPY .mvn .mvn
+COPY mvnw .
+RUN --mount=type=cache,target=/root/.m2 ./mvnw test
 
 FROM openjdk:8-jdk-alpine as runtime
 RUN addgroup -S spring && adduser -S spring -G spring
