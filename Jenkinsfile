@@ -6,7 +6,6 @@ pipeline {
       yaml """
 kind: Pod
 spec:
-  serviceAccountName: jenkins-sa
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:latest
