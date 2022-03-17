@@ -9,7 +9,7 @@ pipeline {
     //         label 'build'
     //         args '--target=build'
     //     } 
-    agent { any }
+    agent any
     
     stages {
         stage('Docker login') {
