@@ -1,15 +1,8 @@
 pipeline {
     environment {
                 DOCKER_HUB_LOGIN = credentials('docker-hub')
-                VERSION = readMavenPom().getVersion()
+                VERSION = ${env.BUILD_ID}
             }
-    // agent { // Equivalent to "docker build -f Dockerfile . --target=build
-    //     dockerfile {
-    //         filename 'Dockerfile'
-    //         dir '.'
-    //         label 'build'
-    //         args '--target=build'
-    //     } 
     agent any
     
     stages {
@@ -33,7 +26,7 @@ pipeline {
         }
         stage('BuildRuntime') {
             steps {
-                sh 'docker build . -t shengzhen4docker/ecr:runtime${env.BUILD_ID} --target=runtime'
+                sh 'docker build . -t shengzhen4docker/ecr:runtime${VERSION} --target=runtime'
                 echo "runtime build success ! BUILD_ID ${env.BUILD_ID}, VERSION ${VERSION}"
             }
         }    
