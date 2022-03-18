@@ -25,13 +25,13 @@ pipeline {
         }
         stage('BuildRuntime') {
             steps {
-                sh 'docker build . -t shengzhen4docker/ecr:runtime${env.BUILD_ID} --target=runtime'
+                sh ("docker build . -t shengzhen4docker/ecr:runtime${env.BUILD_ID} --target=runtime")
                 echo "runtime build success ! BUILD_ID ${env.BUILD_ID}"
             }
         }    
         stage('Push Image') {
             steps {
-                sh 'docker push shengzhen4docker/ecr:runtime${env.BUILD_ID}'
+                sh ("docker push shengzhen4docker/ecr:runtime${env.BUILD_ID}")
                 echo "runtime build success ! BUILD_ID ${env.BUILD_ID}"
             }
         }
