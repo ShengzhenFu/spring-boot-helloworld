@@ -1,7 +1,6 @@
 pipeline {
     environment {
                 DOCKER_HUB_LOGIN = credentials('docker-hub')
-                VERSION = ${env.BUILD_ID}
             }
     agent any
     
@@ -12,28 +11,28 @@ pipeline {
                 echo "docker login success !"
             }
         }
-        stage('build') {
+        stage('Build') {
             steps {
                 sh 'docker build . -t shengzhen4docker/ecr:build --target=build'
-                echo "build success ! BUILD_ID ${env.BUILD_ID}, VERSION ${VERSION}"
+                echo "build success ! BUILD_ID ${env.BUILD_ID}"
             }
         }
-        stage('test') {
+        stage('Test') {
             steps {
                 sh 'docker build . -t shengzhen4docker/ecr:test --target=test'
-                echo "test success ! BUILD_ID ${env.BUILD_ID}, VERSION ${VERSION}"
+                echo "test success ! BUILD_ID ${env.BUILD_ID}"
             }
         }
         stage('BuildRuntime') {
             steps {
-                sh 'docker build . -t shengzhen4docker/ecr:runtime${VERSION} --target=runtime'
-                echo "runtime build success ! BUILD_ID ${env.BUILD_ID}, VERSION ${VERSION}"
+                sh 'docker build . -t shengzhen4docker/ecr:runtime${env.BUILD_ID} --target=runtime'
+                echo "runtime build success ! BUILD_ID ${env.BUILD_ID}"
             }
         }    
         stage('Push Image') {
             steps {
-                sh 'docker push shengzhen4docker/ecr:runtime${VERSION}'
-                echo "runtime build success ! BUILD_ID ${env.BUILD_ID}, VERSION ${VERSION}"
+                sh 'docker push shengzhen4docker/ecr:runtime${env.BUILD_ID}'
+                echo "runtime build success ! BUILD_ID ${env.BUILD_ID}"
             }
         }
         stage('Deploy') {
