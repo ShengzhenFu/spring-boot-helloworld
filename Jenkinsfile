@@ -37,7 +37,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo "this is where kubectl apply -f deploy.yaml will run"
+                sh ("kubectl apply -f deployment.yaml -n springboot")
+                echo "deployed to kubernetes !"
             }
         }    
     }
