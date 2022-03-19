@@ -37,7 +37,9 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh "sed -i 's/runtime/runtime${env.BUILD_ID}/g' ./deployment.yaml"
+                //sh "sed -i 's/runtime/runtime${env.BUILD_ID}/g' ./deployment.yaml"
+                sh 'pwd'
+                sh 'ls -al'
                 sh ("kubectl apply -f deployment.yaml -n springboot")
                 echo "deployed to kubernetes !"
             }
