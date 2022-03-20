@@ -23,6 +23,12 @@ pipeline {
                 echo "test success ! BUILD_ID ${env.BUILD_ID}"
             }
         }
+        stage('Code Scan') {
+            steps {
+                echo "Sonarcube code scan goes here"
+                echo "generate Sonarcube report"
+            }
+        }
         stage('BuildRuntime') {
             steps {
                 sh ("docker build . -t shengzhen4docker/ecr:runtime${env.BUILD_ID} --target=runtime")
