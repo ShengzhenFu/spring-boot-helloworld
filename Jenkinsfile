@@ -26,7 +26,7 @@ pipeline {
         stage('Code Scan') {
             steps {
                 echo "Sonarcube code scan goes here"
-                echo "generate Sonarcube report"
+                echo "generate code scan report"
             }
         }
         stage('BuildRuntime') {
