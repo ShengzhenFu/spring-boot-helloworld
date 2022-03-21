@@ -35,7 +35,7 @@ public class ServiceInfoControllerTest {
     @Test
     public void testPing() throws IOException {
         String response = serviceInfoController.ping();
-        assertThat(response).isEqualTo("Hello World! It is wonderful!");
+        assertThat(response).isEqualTo("Hello World! It is wonderful!error");
     }
 }
 
