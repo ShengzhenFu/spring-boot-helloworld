@@ -6,7 +6,7 @@
 
 
 TODO
-add SonarQube server to scan code after unit test
+add SonarQube server to scan code after unit test, for code scan
 
 ```
         stage('Sonar scan execution') {
