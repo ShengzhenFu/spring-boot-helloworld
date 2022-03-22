@@ -15,17 +15,17 @@ spec:
     spec:
       containers:
         - name: spring-boot-app
-          image: shengzhen4docker/ecr:runtime9
+          image: shengzhen4docker/ecr:runtime
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080 # The port that the container is running on in the cluster
           resources:
             limits:
               cpu: 0.2
-              memory: 128Mi
+              memory: 512Mi
             requests:
               cpu: 0.2
-              memory: 128Mi
+              memory: 512Mi
 
 ---
 apiVersion: v1 # Kubernetes API version

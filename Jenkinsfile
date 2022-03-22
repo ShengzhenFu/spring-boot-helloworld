@@ -23,6 +23,12 @@ pipeline {
                 echo "test success ! BUILD_ID ${env.BUILD_ID}"
             }
         }
+        stage('Code Scan') {
+            steps {
+                echo "Sonarcube code scan goes here"
+                echo "generate code scan report"
+            }
+        }
         stage('BuildRuntime') {
             steps {
                 sh ("docker build . -t shengzhen4docker/ecr:runtime${env.BUILD_ID} --target=runtime")
@@ -37,6 +43,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+                sh "sed -i 'deployment.bak' 's/runtime/runtime${env.BUILD_ID}/g' deployment.yaml"
                 sh ("kubectl apply -f deployment.yaml -n springboot")
                 echo "deployed to kubernetes !"
             }
