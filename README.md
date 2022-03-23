@@ -37,3 +37,9 @@ add SonarQube server to scan code after unit test, for code scan
             }
         }
 ```
+
+
+start Jenkins on MacOS
+```
+/usr/local/opt/openjdk@11/bin/java -Dmail.smtp.starttls.enable=true -jar /usr/local/opt/jenkins-lts/libexec/jenkins.war --httpListenAddress=192.168.0.218 --httpPort=2222
+```
